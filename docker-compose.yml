@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multidisciplinary_deepfake_detection_app
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    entrypoint: ["/app/entrypoint.sh"]
+    command: ["python", "src/main.py"]
+
+  redis:
+    image: "redis:6.2"
+    container_name: multidisciplinary_deepfake_detection_redis
+    ports:
+      - "6379:6379"

@@ -1,0 +1,7 @@
+pillow==10.4.0
+plotly==5.24.1
+requests==2.31.0
+
+torch>=2.1.0
+
+

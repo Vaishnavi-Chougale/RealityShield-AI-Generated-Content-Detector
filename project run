@@ -1,0 +1,3 @@
+cd d:\Multimodel\Multimodel-Deepkafe-main
+python complete_pipeline.py  
+
